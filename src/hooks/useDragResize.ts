@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { usePersistFn } from 'ahooks';
+import { usePersistFn } from '../utils/usePersistFn';
 
 export default function useDragResize(
   handleResize: ({ width }: { width: number }) => void,

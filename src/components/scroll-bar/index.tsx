@@ -1,4 +1,4 @@
-import { usePersistFn } from 'ahooks'
+import { usePersistFn } from '../../utils/usePersistFn'
 import { observer } from 'mobx-react-lite'
 import React, { memo, useCallback, useContext, useRef, useState } from 'react'
 import Context from '../../context'

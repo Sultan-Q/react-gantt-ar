@@ -26,3 +26,4 @@ export const arSA: GanttLocale = Object.freeze({
   }
 });
 
+
