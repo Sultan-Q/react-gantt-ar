@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useCallback, useContext } from 'react';
 import Context from "../../context";
 import useDragResize from "../../hooks/useDragResize";
-import "./index.less";
+import "./index.css";
 var Divider = function Divider() {
   var _useContext = useContext(Context),
     store = _useContext.store,
@@ -27,7 +27,8 @@ var Divider = function Divider() {
         width: tableWidth
       },
       minWidth: 200,
-      maxWidth: store.width * 0.6
+      maxWidth: store.width * 0.6,
+      direction: store.isRTL ? -1 : 1
     }),
     _useDragResize2 = _slicedToArray(_useDragResize, 2),
     handleMouseDown = _useDragResize2[0],
@@ -35,9 +36,7 @@ var Divider = function Divider() {
   return /*#__PURE__*/React.createElement("div", {
     role: "none",
     className: classNames(prefixClsDivider, _defineProperty({}, "".concat(prefixClsDivider, "_only"), !tableCollapseAble)),
-    style: {
-      left: left - 1
-    },
+    style: _defineProperty({}, store.isRTL ? 'right' : 'left', left - 1),
     onMouseDown: tableWidth === 0 ? undefined : handleMouseDown
   }, resizing && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -57,7 +56,7 @@ var Divider = function Divider() {
     },
     onClick: handleClick
   }, /*#__PURE__*/React.createElement("i", {
-    className: classNames("".concat(prefixClsDivider, "-arrow"), _defineProperty({}, "".concat(prefixClsDivider, "-reverse"), left <= 0))
+    className: classNames("".concat(prefixClsDivider, "-arrow"), _defineProperty({}, "".concat(prefixClsDivider, "-reverse"), store.isRTL ? left > 0 : left <= 0))
   })));
 };
 export default observer(Divider);

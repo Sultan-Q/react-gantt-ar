@@ -10,7 +10,7 @@ var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/obje
 var _mobxReactLite = require("mobx-react-lite");
 var _react = _interopRequireWildcard(require("react"));
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var TableHeader = function TableHeader() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,

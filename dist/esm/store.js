@@ -18,7 +18,7 @@ import weekday from 'dayjs/plugin/weekday';
 import debounce from 'lodash/debounce';
 import find from 'lodash/find';
 import throttle from 'lodash/throttle';
-import { action, computed, observable, runInAction, toJS } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction, toJS } from 'mobx';
 import { createRef } from 'react';
 import { defaultLocale } from "./Gantt";
 import { HEADER_HEIGHT, TOP_PADDING } from "./constants";
@@ -67,9 +67,12 @@ var GanttStore = (_class = /*#__PURE__*/function () {
       disabled = _ref$disabled === void 0 ? false : _ref$disabled,
       customSights = _ref.customSights,
       locale = _ref.locale,
-      columnsWidth = _ref.columnsWidth;
+      columnsWidth = _ref.columnsWidth,
+      _ref$isRTL = _ref.isRTL,
+      isRTL = _ref$isRTL === void 0 ? false : _ref$isRTL;
     _classCallCheck(this, GanttStore);
     _defineProperty(this, "locale", _objectSpread({}, defaultLocale));
+    _defineProperty(this, "isRTL", false);
     _defineProperty(this, "_wheelTimer", void 0);
     _defineProperty(this, "scrollTimer", void 0);
     _initializerDefineProperty(this, "data", _descriptor, this);
@@ -165,6 +168,7 @@ var GanttStore = (_class = /*#__PURE__*/function () {
       var baseTop = top - top % _this.rowHeight;
       return _this.selectionIndicatorTop >= baseTop && _this.selectionIndicatorTop <= baseTop + _this.rowHeight;
     });
+    makeObservable(this);
     this.width = 1320;
     this.height = 418;
     this.viewTypeList = customSights.length ? customSights : getViewTypeList(locale);
@@ -181,11 +185,12 @@ var GanttStore = (_class = /*#__PURE__*/function () {
     this.rowHeight = rowHeight;
     this.disabled = disabled;
     this.locale = locale;
+    this.isRTL = isRTL;
   }
   _createClass(GanttStore, [{
     key: "getStartDate",
     value: function getStartDate() {
-      return dayjs().subtract(10, 'day').toString();
+      return dayjs().startOf('day').subtract(10, 'day').toString();
     }
   }, {
     key: "setIsRestDay",
@@ -256,7 +261,7 @@ var GanttStore = (_class = /*#__PURE__*/function () {
   }, {
     key: "syncSize",
     value: function syncSize(size) {
-      if (!size.height || !size.width) return;
+      if (!size || !size.height || !size.width) return;
       var width = size.width,
         height = size.height;
       if (this.height !== height) this.height = height;
@@ -650,7 +655,7 @@ var GanttStore = (_class = /*#__PURE__*/function () {
         var translateY = baseTop + index * topStep;
         var _parent = item._parent;
         var record = _objectSpread(_objectSpread({}, item.record), {}, {
-          disabled: _this4.disabled
+          disabled: _this4.disabled || item.record.disabled
         });
         var bar = {
           key: item.key,

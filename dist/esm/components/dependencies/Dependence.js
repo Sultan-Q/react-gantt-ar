@@ -4,7 +4,7 @@ import find from 'lodash/find';
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import Context from "../../context";
-import "./Dependence.less";
+import "./Dependence.css";
 var spaceX = 10;
 var spaceY = 10;
 /**

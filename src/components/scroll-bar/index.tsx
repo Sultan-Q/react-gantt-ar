@@ -43,7 +43,7 @@ const ScrollBar: React.FC = () => {
     <div
       role='none'
       className={prefixClsScrollBar}
-      style={{ left: tableWidth, width: viewWidth }}
+      style={{ [store.isRTL ? 'right' : 'left']: tableWidth, width: viewWidth }}
       onMouseDown={handleMouseDown}
     >
       {resizing && (

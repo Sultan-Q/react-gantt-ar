@@ -74,9 +74,12 @@ var GanttStore = (_class = /*#__PURE__*/function () {
       disabled = _ref$disabled === void 0 ? false : _ref$disabled,
       customSights = _ref.customSights,
       locale = _ref.locale,
-      columnsWidth = _ref.columnsWidth;
+      columnsWidth = _ref.columnsWidth,
+      _ref$isRTL = _ref.isRTL,
+      isRTL = _ref$isRTL === void 0 ? false : _ref$isRTL;
     (0, _classCallCheck2.default)(this, GanttStore);
     (0, _defineProperty2.default)(this, "locale", (0, _objectSpread2.default)({}, _Gantt.defaultLocale));
+    (0, _defineProperty2.default)(this, "isRTL", false);
     (0, _defineProperty2.default)(this, "_wheelTimer", void 0);
     (0, _defineProperty2.default)(this, "scrollTimer", void 0);
     (0, _initializerDefineProperty2.default)(this, "data", _descriptor, this);
@@ -172,6 +175,7 @@ var GanttStore = (_class = /*#__PURE__*/function () {
       var baseTop = top - top % _this.rowHeight;
       return _this.selectionIndicatorTop >= baseTop && _this.selectionIndicatorTop <= baseTop + _this.rowHeight;
     });
+    (0, _mobx.makeObservable)(this);
     this.width = 1320;
     this.height = 418;
     this.viewTypeList = customSights.length ? customSights : getViewTypeList(locale);
@@ -188,11 +192,12 @@ var GanttStore = (_class = /*#__PURE__*/function () {
     this.rowHeight = rowHeight;
     this.disabled = disabled;
     this.locale = locale;
+    this.isRTL = isRTL;
   }
   (0, _createClass2.default)(GanttStore, [{
     key: "getStartDate",
     value: function getStartDate() {
-      return (0, _dayjs.default)().subtract(10, 'day').toString();
+      return (0, _dayjs.default)().startOf('day').subtract(10, 'day').toString();
     }
   }, {
     key: "setIsRestDay",
@@ -263,7 +268,7 @@ var GanttStore = (_class = /*#__PURE__*/function () {
   }, {
     key: "syncSize",
     value: function syncSize(size) {
-      if (!size.height || !size.width) return;
+      if (!size || !size.height || !size.width) return;
       var width = size.width,
         height = size.height;
       if (this.height !== height) this.height = height;
@@ -657,7 +662,7 @@ var GanttStore = (_class = /*#__PURE__*/function () {
         var translateY = baseTop + index * topStep;
         var _parent = item._parent;
         var record = (0, _objectSpread2.default)((0, _objectSpread2.default)({}, item.record), {}, {
-          disabled: _this4.disabled
+          disabled: _this4.disabled || item.record.disabled
         });
         var bar = {
           key: item.key,

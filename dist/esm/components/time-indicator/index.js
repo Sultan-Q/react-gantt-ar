@@ -3,7 +3,7 @@ import React, { useContext, useCallback, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var TimeIndicator = function TimeIndicator() {
   var _useContext = useContext(Context),
     store = _useContext.store,

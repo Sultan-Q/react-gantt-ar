@@ -9,7 +9,7 @@ exports.defaultLocale = exports.default = void 0;
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread2"));
 var _ahooks = require("ahooks");
 var _react = _interopRequireWildcard(require("react"));
-require("./Gantt.less");
+require("./Gantt.css");
 var _chart = _interopRequireDefault(require("./components/chart"));
 var _divider = _interopRequireDefault(require("./components/divider"));
 var _scrollBar = _interopRequireDefault(require("./components/scroll-bar"));
@@ -24,6 +24,7 @@ var _constants = require("./constants");
 var _context = _interopRequireDefault(require("./context"));
 var _locales = require("./locales");
 var _store = _interopRequireDefault(require("./store"));
+require("dayjs/locale/ar-sa");
 var prefixCls = 'gantt';
 var Body = function Body(_ref) {
   var children = _ref.children;
@@ -35,8 +36,11 @@ var Body = function Body(_ref) {
     store.syncSize(size);
   }, [size, store]);
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "".concat(prefixCls, "-body"),
-    ref: reference
+    className: "".concat(prefixCls, "-body ").concat(store.isRTL ? "".concat(prefixCls, "-rtl") : ''),
+    ref: reference,
+    style: {
+      direction: store.isRTL ? 'rtl' : 'ltr'
+    }
   }, children);
 };
 var defaultLocale = exports.defaultLocale = (0, _objectSpread2.default)({}, _locales.zhCN);
@@ -86,14 +90,26 @@ var GanttComponent = function GanttComponent(props) {
     _props$locale = props.locale,
     locale = _props$locale === void 0 ? (0, _objectSpread2.default)({}, defaultLocale) : _props$locale,
     _props$hideTable = props.hideTable,
-    hideTable = _props$hideTable === void 0 ? false : _props$hideTable;
+    hideTable = _props$hideTable === void 0 ? false : _props$hideTable,
+    _props$isRTL = props.isRTL,
+    isRTL = _props$isRTL === void 0 ? false : _props$isRTL,
+    _props$loading = props.loading,
+    loading = _props$loading === void 0 ? false : _props$loading;
+
+  // Set dayjs locale if locale matches ar-sa structure
+  // This is a bit implicit, but helpful
+  if (locale.today === 'اليوم') {
+    // assuming 'dayjs' is imported as 'dayjs'
+    require('dayjs').locale('ar-sa');
+  }
   var store = (0, _react.useMemo)(function () {
     return new _store.default({
       rowHeight: rowHeight,
       disabled: disabled,
       customSights: customSights,
       locale: locale,
-      columnsWidth: columnsWidth
+      columnsWidth: columnsWidth,
+      isRTL: isRTL
     });
   }, [rowHeight]);
   (0, _react.useEffect)(function () {
@@ -147,7 +163,9 @@ var GanttComponent = function GanttComponent(props) {
       renderLeftText: renderLeftText,
       renderRightText: renderRightText,
       onExpand: onExpand,
-      hideTable: hideTable
+      hideTable: hideTable,
+      isRTL: isRTL,
+      loading: loading
     };
   }, [store, getBarColor, showBackToday, showUnitSwitch, onRow, tableIndent, expandIcon, renderBar, renderInvalidBar, renderGroupBar, onBarClick, tableCollapseAble, renderBarThumb, scrollTop, alwaysShowTaskBar, renderLeftText, renderRightText, onExpand, hideTable]);
   return /*#__PURE__*/_react.default.createElement(_context.default.Provider, {

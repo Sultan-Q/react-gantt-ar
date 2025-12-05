@@ -13,7 +13,7 @@ var _mobxReactLite = require("mobx-react-lite");
 var _react = _interopRequireWildcard(require("react"));
 var _context = _interopRequireDefault(require("../../context"));
 var _useDragResize3 = _interopRequireDefault(require("../../hooks/useDragResize"));
-require("./index.less");
+require("./index.css");
 var Divider = function Divider() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,
@@ -35,7 +35,8 @@ var Divider = function Divider() {
         width: tableWidth
       },
       minWidth: 200,
-      maxWidth: store.width * 0.6
+      maxWidth: store.width * 0.6,
+      direction: store.isRTL ? -1 : 1
     }),
     _useDragResize2 = (0, _slicedToArray2.default)(_useDragResize, 2),
     handleMouseDown = _useDragResize2[0],
@@ -43,9 +44,7 @@ var Divider = function Divider() {
   return /*#__PURE__*/_react.default.createElement("div", {
     role: "none",
     className: (0, _classnames.default)(prefixClsDivider, (0, _defineProperty2.default)({}, "".concat(prefixClsDivider, "_only"), !tableCollapseAble)),
-    style: {
-      left: left - 1
-    },
+    style: (0, _defineProperty2.default)({}, store.isRTL ? 'right' : 'left', left - 1),
     onMouseDown: tableWidth === 0 ? undefined : handleMouseDown
   }, resizing && /*#__PURE__*/_react.default.createElement("div", {
     style: {
@@ -65,7 +64,7 @@ var Divider = function Divider() {
     },
     onClick: handleClick
   }, /*#__PURE__*/_react.default.createElement("i", {
-    className: (0, _classnames.default)("".concat(prefixClsDivider, "-arrow"), (0, _defineProperty2.default)({}, "".concat(prefixClsDivider, "-reverse"), left <= 0))
+    className: (0, _classnames.default)("".concat(prefixClsDivider, "-arrow"), (0, _defineProperty2.default)({}, "".concat(prefixClsDivider, "-reverse"), store.isRTL ? left > 0 : left <= 0))
   })));
 };
 var _default = exports.default = (0, _mobxReactLite.observer)(Divider);

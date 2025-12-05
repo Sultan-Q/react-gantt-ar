@@ -6,7 +6,7 @@ import React, { useCallback, useContext } from 'react';
 import { TOP_PADDING } from "../../constants";
 import Context from "../../context";
 import RowToggler from "./RowToggler";
-import "./index.less";
+import "./index.css";
 var TableRows = function TableRows() {
   var _useContext = useContext(Context),
     store = _useContext.store,
@@ -14,15 +14,26 @@ var TableRows = function TableRows() {
     tableIndent = _useContext.tableIndent,
     expandIcon = _useContext.expandIcon,
     prefixCls = _useContext.prefixCls,
-    onExpand = _useContext.onExpand;
+    onExpand = _useContext.onExpand,
+    loading = _useContext.loading;
   var columns = store.columns,
-    rowHeight = store.rowHeight;
+    rowHeight = store.rowHeight,
+    isRTL = store.isRTL;
   var columnsWidth = store.getColumnsWidth;
   var barList = store.getBarList;
   var _store$getVisibleRows = store.getVisibleRows,
     count = _store$getVisibleRows.count,
     start = _store$getVisibleRows.start;
   var prefixClsTableBody = "".concat(prefixCls, "-table-body");
+  if (loading) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: 'center',
+        color: ' rgba(0,0,0,0.65)',
+        marginTop: 30
+      }
+    }, store.locale.loading);
+  }
   if (barList.length === 0) {
     return /*#__PURE__*/React.createElement("div", {
       style: {
@@ -30,7 +41,7 @@ var TableRows = function TableRows() {
         color: ' rgba(0,0,0,0.65)',
         marginTop: 30
       }
-    }, "\u6682\u65E0\u6570\u636E");
+    }, store.locale.noData);
   }
   return /*#__PURE__*/React.createElement(React.Fragment, null, barList.slice(start, start + count).map(function (bar, rowIndex) {
     // 父元素如果是其最后一个祖先的子，要隐藏上一层的线
@@ -57,28 +68,22 @@ var TableRows = function TableRows() {
           width: columnsWidth[index],
           minWidth: column.minWidth,
           maxWidth: column.maxWidth,
-          textAlign: column.align ? column.align : 'left',
-          paddingLeft: index === 0 ? tableIndent * (bar._depth + 1) + 10 : 12
+          textAlign: column.align ? column.align : isRTL ? 'right' : 'left',
+          paddingLeft: !isRTL && index === 0 ? tableIndent * (bar._depth + 1) + 10 : 12,
+          paddingRight: isRTL && index === 0 ? tableIndent * (bar._depth + 1) + 10 : 12
         }, column.style)
       }, index === 0 && new Array(bar._depth).fill(0).map(function (_, i) {
         return /*#__PURE__*/React.createElement("div", {
           key: i,
           className: classNames("".concat(prefixClsTableBody, "-row-indentation"), _defineProperty(_defineProperty({}, "".concat(prefixClsTableBody, "-row-indentation-hidden"), isLastChild && i === bar._depth - 2), "".concat(prefixClsTableBody, "-row-indentation-both"), i === bar._depth - 1)),
-          style: {
-            top: -(rowHeight / 2) + 1,
-            left: tableIndent * i + 15,
-            width: tableIndent * 1.5 + 5
-          }
+          style: _defineProperty(_defineProperty({
+            top: -(rowHeight / 2) + 1
+          }, isRTL ? 'right' : 'left', tableIndent * i + 15), "width", tableIndent * 1.5 + 5)
         });
       }), index === 0 && bar._childrenCount > 0 && /*#__PURE__*/React.createElement("div", {
-        style: {
-          position: 'absolute',
-          left: tableIndent * bar._depth + 15,
-          background: 'white',
-          zIndex: 9,
-          transform: 'translateX(-52%)',
-          padding: 1
-        }
+        style: _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty({
+          position: 'absolute'
+        }, isRTL ? 'right' : 'left', tableIndent * bar._depth + 15), "background", 'white'), "zIndex", 9), "transform", isRTL ? 'translateX(52%)' : 'translateX(-52%)'), "padding", 1)
       }, expandIcon ? expandIcon({
         level: bar._depth,
         collapsed: bar._collapsed,
@@ -107,7 +112,8 @@ var TableBorders = function TableBorders() {
   var _useContext2 = useContext(Context),
     store = _useContext2.store,
     prefixCls = _useContext2.prefixCls;
-  var columns = store.columns;
+  var columns = store.columns,
+    isRTL = store.isRTL;
   var columnsWidth = store.getColumnsWidth;
   var barList = store.getBarList;
   if (barList.length === 0) return null;
@@ -123,7 +129,7 @@ var TableBorders = function TableBorders() {
         width: columnsWidth[index],
         minWidth: column.minWidth,
         maxWidth: column.maxWidth,
-        textAlign: column.align ? column.align : 'left'
+        textAlign: column.align ? column.align : isRTL ? 'right' : 'left'
       }, column.style)
     });
   }));

@@ -1,7 +1,20 @@
 {
-  "name": "rc-gantt",
-  "version": "0.3.3",
-  "description": "react gantt component",
+  "name": "rc-gantt-ar",
+  "version": "0.4.14",
+  "description": "React Gantt component with Arabic (RTL) support and React 19 compatibility",
+  "keywords": [
+    "react",
+    "gantt",
+    "chart",
+    "timeline",
+    "task",
+    "project",
+    "management",
+    "schedule",
+    "arabic",
+    "rtl",
+    "react-component"
+  ],
   "homepage": "https://ahwgs.github.io/react-gantt/#/",
   "repository": {
     "type": "git",
@@ -25,6 +38,7 @@
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
+    "postbuild": "node scripts/compile-less.js",
     "start": "npm run dev"
   },
   "commitlint": {
@@ -56,7 +70,7 @@
     "dayjs": "^1.9.7",
     "lodash": "^4.17.20",
     "lodash-es": "^4.17.21",
-    "mobx": "4.7.0",
+    "mobx": "^6.9.0",
     "mobx-react-lite": "^4.0.7"
   },
   "devDependencies": {
@@ -70,7 +84,9 @@
     "dumi": "^2.4.21",
     "eslint": "^8.23.0",
     "father": "^4.5.2",
+    "glob": "^13.0.0",
     "husky": "^8.0.1",
+    "less": "^4.4.2",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
@@ -78,7 +94,7 @@
     "react-dom": "^18.0.0 || ^19.0.0",
     "stylelint": "^14.9.1",
     "tslib": "^2.8.1",
-    "typescript": "^4.8.2"
+    "typescript": "^5.7.0"
   },
   "peerDependencies": {
     "react": ">=17.0.0 || ^18.0.0 || ^19.0.0",

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 import DragResize from "../drag-resize";
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var TimeAxis = function TimeAxis() {
   var _useContext = useContext(Context),
     store = _useContext.store,
@@ -36,10 +36,7 @@ var TimeAxis = function TimeAxis() {
     type: "move"
   }, /*#__PURE__*/React.createElement("div", {
     className: prefixClsTimeAxis,
-    style: {
-      left: store.tableWidth,
-      width: store.viewWidth
-    }
+    style: _defineProperty(_defineProperty({}, store.isRTL ? 'right' : 'left', store.tableWidth), "width", store.viewWidth)
   }, /*#__PURE__*/React.createElement("div", {
     className: "".concat(prefixClsTimeAxis, "-render-chunk"),
     style: {

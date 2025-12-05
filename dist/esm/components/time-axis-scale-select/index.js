@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React, { useCallback, useContext, useRef, useState } from 'react';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var TimeAxisScaleSelect = function TimeAxisScaleSelect() {
   var _useContext = useContext(Context),
     store = _useContext.store,

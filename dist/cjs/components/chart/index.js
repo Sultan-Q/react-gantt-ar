@@ -1,11 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault").default;
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard").default;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault").default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _mobxReactLite = require("mobx-react-lite");
 var _react = _interopRequireWildcard(require("react"));
 var _context = _interopRequireDefault(require("../../context"));
@@ -14,7 +15,7 @@ var _barThumbList = _interopRequireDefault(require("../bar-thumb-list"));
 var _dependencies = _interopRequireDefault(require("../dependencies"));
 var _dragPresent = _interopRequireDefault(require("../drag-present"));
 var _today = _interopRequireDefault(require("../today"));
-require("./index.less");
+require("./index.css");
 var Chart = function Chart() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,
@@ -44,11 +45,7 @@ var Chart = function Chart() {
     className: "".concat(prefixCls, "-chart"),
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
-    style: {
-      left: tableWidth,
-      width: viewWidth,
-      height: bodyScrollHeight
-    }
+    style: (0, _defineProperty2.default)((0, _defineProperty2.default)((0, _defineProperty2.default)({}, store.isRTL ? 'right' : 'left', tableWidth), "width", viewWidth), "height", bodyScrollHeight)
   }, /*#__PURE__*/_react.default.createElement("svg", {
     className: "".concat(prefixCls, "-chart-svg-renderer"),
     xmlns: "http://www.w3.org/2000/svg",

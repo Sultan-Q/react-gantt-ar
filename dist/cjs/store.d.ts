@@ -7,12 +7,13 @@ export declare const ONE_DAY_MS = 86400000;
 export declare const getViewTypeList: (locale: any) => Gantt.SightConfig[];
 declare function isRestDay(date: string): boolean;
 declare class GanttStore {
-    constructor({ rowHeight, disabled, customSights, locale, columnsWidth, }: {
+    constructor({ rowHeight, disabled, customSights, locale, columnsWidth, isRTL, }: {
         rowHeight: number;
         disabled: boolean;
         customSights: Gantt.SightConfig[];
         locale: GanttLocale;
         columnsWidth?: number;
+        isRTL?: boolean;
     });
     locale: {
         today: string;
@@ -24,6 +25,8 @@ declare class GanttStore {
         halfYear: string;
         firstHalf: string;
         secondHalf: string;
+        noData: string;
+        loading: string;
         majorFormat: {
             day: string;
             week: string;
@@ -39,6 +42,7 @@ declare class GanttStore {
             halfYear: string;
         };
     };
+    isRTL: boolean;
     _wheelTimer: number | undefined;
     scrollTimer: number | undefined;
     data: Gantt.Item[];
@@ -86,7 +90,7 @@ declare class GanttStore {
     syncSize(size: {
         width?: number;
         height?: number;
-    }): void;
+    } | undefined): void;
     handleResizeTableWidth(width: number): void;
     initWidth(): void;
     setTranslateX(translateX: number): void;

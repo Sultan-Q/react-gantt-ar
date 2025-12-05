@@ -12,7 +12,7 @@ var _mobxReactLite = require("mobx-react-lite");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _dragResize = _interopRequireDefault(require("../drag-resize"));
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var TimeAxis = function TimeAxis() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,
@@ -44,10 +44,7 @@ var TimeAxis = function TimeAxis() {
     type: "move"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: prefixClsTimeAxis,
-    style: {
-      left: store.tableWidth,
-      width: store.viewWidth
-    }
+    style: (0, _defineProperty2.default)((0, _defineProperty2.default)({}, store.isRTL ? 'right' : 'left', store.tableWidth), "width", store.viewWidth)
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "".concat(prefixClsTimeAxis, "-render-chunk"),
     style: {

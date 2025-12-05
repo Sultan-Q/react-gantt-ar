@@ -8,7 +8,7 @@ exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _react = _interopRequireDefault(require("react"));
 var _classnames = _interopRequireDefault(require("classnames"));
-require("./RowToggler.less");
+require("./RowToggler.css");
 var RowToggler = function RowToggler(_ref) {
   var onClick = _ref.onClick,
     collapsed = _ref.collapsed,

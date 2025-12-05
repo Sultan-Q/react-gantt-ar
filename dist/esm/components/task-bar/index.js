@@ -8,7 +8,7 @@ import { TOP_PADDING } from "../../constants";
 import Context from "../../context";
 import { ONE_DAY_MS } from "../../store";
 import DragResize from "../drag-resize";
-import "./index.less";
+import "./index.css";
 var TaskBar = function TaskBar(_ref) {
   var data = _ref.data;
   var _useContext = useContext(Context),
@@ -78,7 +78,7 @@ var TaskBar = function TaskBar(_ref) {
   var handleAutoScroll = useCallback(function (delta) {
     store.setTranslateX(store.translateX + delta);
   }, [store]);
-  var allowDrag = showDragBar && !loading;
+  var allowDrag = showDragBar && !loading && !disabled;
   var handleClick = useCallback(function (e) {
     e.stopPropagation();
     if (onBarClick) onBarClick(data.record);
@@ -95,6 +95,9 @@ var TaskBar = function TaskBar(_ref) {
     var daysWidth = Number(getDateWidth(translateX + width + moveCalc, translateX));
     return "".concat(daysWidth, " ").concat(daysWidth > 1 ? locale.days : locale.day);
   }, [translateX, width, moveCalc, translateX]);
+  var backgroundColor = record.backgroundColor || getBarColor && getBarColor(record).backgroundColor || themeColor[0];
+  var borderColor = record.borderColor || getBarColor && getBarColor(record).borderColor || themeColor[1];
+  var isGradient = backgroundColor && (backgroundColor.includes('gradient') || backgroundColor.includes('url'));
   return /*#__PURE__*/React.createElement("div", {
     role: "none",
     className: classNames(prefixClsTaskBar, _defineProperty(_defineProperty({}, "".concat(prefixClsTaskBar, "-invalid-date-range"), invalidDateRange), "".concat(prefixClsTaskBar, "-overdue"), !invalidDateRange)),
@@ -166,6 +169,15 @@ var TaskBar = function TaskBar(_ref) {
   }, renderBar ? renderBar(data, {
     width: width + 1,
     height: barHeight + 1
+  }) : isGradient ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: width + 1,
+      height: barHeight + 1,
+      background: backgroundColor,
+      border: "1px solid ".concat(borderColor),
+      borderRadius: 4,
+      boxSizing: 'border-box'
+    }
   }) : /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     version: "1.1",
@@ -173,8 +185,8 @@ var TaskBar = function TaskBar(_ref) {
     height: barHeight + 1,
     viewBox: "0 0 ".concat(width + 1, " ").concat(barHeight + 1)
   }, /*#__PURE__*/React.createElement("path", {
-    fill: record.backgroundColor || getBarColor && getBarColor(record).backgroundColor || themeColor[0],
-    stroke: record.borderColor || getBarColor && getBarColor(record).borderColor || themeColor[1],
+    fill: backgroundColor,
+    stroke: borderColor,
     d: "\n              M".concat(width - 2, ",0.5\n              l-").concat(width - 5, ",0\n              c-0.41421,0 -0.78921,0.16789 -1.06066,0.43934\n              c-0.27145,0.27145 -0.43934,0.64645 -0.43934,1.06066\n              l0,5.3\n\n              c0.03256,0.38255 0.20896,0.724 0.47457,0.97045\n              c0.26763,0.24834 0.62607,0.40013 1.01995,0.40013\n              l4,0\n\n              l").concat(width - 12, ",0\n\n              l4,0\n              c0.41421,0 0.78921,-0.16789 1.06066,-0.43934\n              c0.27145,-0.27145 0.43934,-0.64645 0.43934,-1.06066\n\n              l0,-5.3\n              c-0.03256,-0.38255 -0.20896,-0.724 -0.47457,-0.97045\n              c-0.26763,-0.24834 -0.62607,-0.40013 -1.01995,-0.40013z\n            ")
   })))), (allowDrag || disabled || alwaysShowTaskBar) && /*#__PURE__*/React.createElement("div", {
     className: "".concat(prefixClsTaskBar, "-label"),

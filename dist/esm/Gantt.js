@@ -1,7 +1,7 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import { useSize } from 'ahooks';
 import React, { useContext, useEffect, useImperativeHandle, useMemo, useRef } from 'react';
-import "./Gantt.less";
+import "./Gantt.css";
 import Chart from "./components/chart";
 import Divider from "./components/divider";
 import ScrollBar from "./components/scroll-bar";
@@ -16,6 +16,7 @@ import { BAR_HEIGHT, ROW_HEIGHT, TABLE_INDENT } from "./constants";
 import Context from "./context";
 import { zhCN } from "./locales";
 import GanttStore from "./store";
+import 'dayjs/locale/ar-sa';
 var prefixCls = 'gantt';
 var Body = function Body(_ref) {
   var children = _ref.children;
@@ -27,8 +28,11 @@ var Body = function Body(_ref) {
     store.syncSize(size);
   }, [size, store]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "".concat(prefixCls, "-body"),
-    ref: reference
+    className: "".concat(prefixCls, "-body ").concat(store.isRTL ? "".concat(prefixCls, "-rtl") : ''),
+    ref: reference,
+    style: {
+      direction: store.isRTL ? 'rtl' : 'ltr'
+    }
   }, children);
 };
 export var defaultLocale = _objectSpread({}, zhCN);
@@ -78,14 +82,26 @@ var GanttComponent = function GanttComponent(props) {
     _props$locale = props.locale,
     locale = _props$locale === void 0 ? _objectSpread({}, defaultLocale) : _props$locale,
     _props$hideTable = props.hideTable,
-    hideTable = _props$hideTable === void 0 ? false : _props$hideTable;
+    hideTable = _props$hideTable === void 0 ? false : _props$hideTable,
+    _props$isRTL = props.isRTL,
+    isRTL = _props$isRTL === void 0 ? false : _props$isRTL,
+    _props$loading = props.loading,
+    loading = _props$loading === void 0 ? false : _props$loading;
+
+  // Set dayjs locale if locale matches ar-sa structure
+  // This is a bit implicit, but helpful
+  if (locale.today === 'اليوم') {
+    // assuming 'dayjs' is imported as 'dayjs'
+    require('dayjs').locale('ar-sa');
+  }
   var store = useMemo(function () {
     return new GanttStore({
       rowHeight: rowHeight,
       disabled: disabled,
       customSights: customSights,
       locale: locale,
-      columnsWidth: columnsWidth
+      columnsWidth: columnsWidth,
+      isRTL: isRTL
     });
   }, [rowHeight]);
   useEffect(function () {
@@ -139,7 +155,9 @@ var GanttComponent = function GanttComponent(props) {
       renderLeftText: renderLeftText,
       renderRightText: renderRightText,
       onExpand: onExpand,
-      hideTable: hideTable
+      hideTable: hideTable,
+      isRTL: isRTL,
+      loading: loading
     };
   }, [store, getBarColor, showBackToday, showUnitSwitch, onRow, tableIndent, expandIcon, renderBar, renderInvalidBar, renderGroupBar, onBarClick, tableCollapseAble, renderBarThumb, scrollTop, alwaysShowTaskBar, renderLeftText, renderRightText, onExpand, hideTable]);
   return /*#__PURE__*/React.createElement(Context.Provider, {

@@ -11,7 +11,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _mobxReactLite = require("mobx-react-lite");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var TaskBarThumb = function TaskBarThumb(_ref) {
   var data = _ref.data;
   var _useContext = (0, _react.useContext)(_context.default),

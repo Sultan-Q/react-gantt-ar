@@ -8,6 +8,8 @@ export var zhCN = Object.freeze({
   halfYear: "年视图",
   firstHalf: "上半年",
   secondHalf: "下半年",
+  noData: "暂无数据",
+  loading: "加载中...",
   majorFormat: {
     day: "YYYY年MM月",
     week: "YYYY年MM月",

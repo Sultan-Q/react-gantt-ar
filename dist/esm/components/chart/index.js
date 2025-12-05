@@ -1,3 +1,4 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import { observer } from 'mobx-react-lite';
 import React, { memo, useCallback, useContext, useEffect } from 'react';
 import Context from "../../context";
@@ -6,7 +7,7 @@ import BarThumbList from "../bar-thumb-list";
 import Dependencies from "../dependencies";
 import DragPresent from "../drag-present";
 import Today from "../today";
-import "./index.less";
+import "./index.css";
 var Chart = function Chart() {
   var _useContext = useContext(Context),
     store = _useContext.store,
@@ -36,11 +37,7 @@ var Chart = function Chart() {
     className: "".concat(prefixCls, "-chart"),
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
-    style: {
-      left: tableWidth,
-      width: viewWidth,
-      height: bodyScrollHeight
-    }
+    style: _defineProperty(_defineProperty(_defineProperty({}, store.isRTL ? 'right' : 'left', tableWidth), "width", viewWidth), "height", bodyScrollHeight)
   }, /*#__PURE__*/React.createElement("svg", {
     className: "".concat(prefixCls, "-chart-svg-renderer"),
     xmlns: "http://www.w3.org/2000/svg",

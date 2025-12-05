@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 import { getMaxRange } from "../../utils";
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var height = 8;
 var GroupBar = function GroupBar(_ref) {
   var data = _ref.data;

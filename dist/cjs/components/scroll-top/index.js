@@ -9,7 +9,7 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _mobxReactLite = require("mobx-react-lite");
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var ScrollTop = function ScrollTop() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,

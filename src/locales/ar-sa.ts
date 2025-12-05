@@ -10,9 +10,11 @@ export const arSA: GanttLocale = Object.freeze({
   halfYear: "نصف سنة",
   firstHalf: "النصف الأول",
   secondHalf: "النصف الثاني",
+  noData: "لا توجد بيانات",
+  loading: "جاري التحميل...",
   majorFormat: {
-    day: "YYYY، MMMM",
-    week: "YYYY، MMMM",
+    day: "MMMM YYYY",
+    week: "MMMM YYYY",
     month: "YYYY",
     quarter: "YYYY",
     halfYear: "YYYY",
@@ -20,10 +22,8 @@ export const arSA: GanttLocale = Object.freeze({
   minorFormat: {
     day: "D",
     week: "wo [أسبوع]",
-    month: "MMMM",
+    month: "MMMM (M)", 
     quarter: "[Q]Q",
     halfYear: "YYYY-",
   }
 });
-
-

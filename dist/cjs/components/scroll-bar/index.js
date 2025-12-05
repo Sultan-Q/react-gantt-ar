@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _usePersistFn = require("../../utils/usePersistFn");
 var _mobxReactLite = require("mobx-react-lite");
 var _react = _interopRequireWildcard(require("react"));
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var ScrollBar = function ScrollBar() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,
@@ -50,10 +51,7 @@ var ScrollBar = function ScrollBar() {
   return /*#__PURE__*/_react.default.createElement("div", {
     role: "none",
     className: prefixClsScrollBar,
-    style: {
-      left: tableWidth,
-      width: viewWidth
-    },
+    style: (0, _defineProperty2.default)((0, _defineProperty2.default)({}, store.isRTL ? 'right' : 'left', tableWidth), "width", viewWidth),
     onMouseDown: handleMouseDown
   }, resizing && /*#__PURE__*/_react.default.createElement("div", {
     style: {

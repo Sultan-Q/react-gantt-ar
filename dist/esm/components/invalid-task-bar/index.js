@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { usePersistFn } from "../../utils/usePersistFn";
 import Context from "../../context";
 import DragResize from "../drag-resize";
-import "./index.less";
+import "./index.css";
 var barH = 8;
 var startX = 0;
 var renderInvalidBarDefault = function renderInvalidBarDefault(element) {

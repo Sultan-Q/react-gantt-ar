@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var TaskBarThumb = function TaskBarThumb(_ref) {
   var data = _ref.data;
   var _useContext = useContext(Context),

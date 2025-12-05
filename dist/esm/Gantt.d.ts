@@ -3,6 +3,7 @@ import React from 'react';
 import './Gantt.less';
 import type { GanttContext } from './context';
 import type { DefaultRecordType, Gantt } from './types';
+import 'dayjs/locale/ar-sa';
 export interface GanttProps<RecordType = DefaultRecordType> {
     data: Gantt.Record<RecordType>[];
     columns: Gantt.Column[];
@@ -42,6 +43,14 @@ export interface GanttProps<RecordType = DefaultRecordType> {
      * 隐藏左侧表格
      */
     hideTable?: boolean;
+    /**
+     * RTL support
+     */
+    isRTL?: boolean;
+    /**
+     * Loading state
+     */
+    loading?: boolean;
 }
 export interface GanttRef {
     backToday: () => void;
@@ -57,6 +66,8 @@ export interface GanttLocale {
     halfYear: string;
     firstHalf: string;
     secondHalf: string;
+    noData: string;
+    loading: string;
     majorFormat: {
         day: string;
         week: string;

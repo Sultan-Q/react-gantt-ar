@@ -1,7 +1,7 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from 'react';
 import classNames from 'classnames';
-import "./RowToggler.less";
+import "./RowToggler.css";
 var RowToggler = function RowToggler(_ref) {
   var onClick = _ref.onClick,
     collapsed = _ref.collapsed,

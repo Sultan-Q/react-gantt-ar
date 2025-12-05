@@ -2,7 +2,7 @@ import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var TableHeader = function TableHeader() {
   var _useContext = useContext(Context),
     store = _useContext.store,

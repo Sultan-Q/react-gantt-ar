@@ -13,7 +13,9 @@ var _usePersistFn = require("../utils/usePersistFn");
 function useDragResize(handleResize, _ref) {
   var initSize = _ref.initSize,
     minWidthConfig = _ref.minWidth,
-    maxWidthConfig = _ref.maxWidth;
+    maxWidthConfig = _ref.maxWidth,
+    _ref$direction = _ref.direction,
+    direction = _ref$direction === void 0 ? 1 : _ref$direction;
   var _useState = (0, _react.useState)(false),
     _useState2 = (0, _slicedToArray2.default)(_useState, 2),
     resizing = _useState2[0],
@@ -29,7 +31,7 @@ function useDragResize(handleResize, _ref) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             distance = event.clientX - positionRef.current.left;
-            width = initSizeRef.current.width + distance;
+            width = initSizeRef.current.width + distance * direction;
             if (minWidthConfig !== undefined) {
               width = Math.max(width, minWidthConfig);
             }

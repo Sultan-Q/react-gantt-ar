@@ -13,7 +13,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _mobxReactLite = require("mobx-react-lite");
 var _react = _interopRequireWildcard(require("react"));
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var TimeAxisScaleSelect = function TimeAxisScaleSelect() {
   var _useContext = (0, _react.useContext)(_context.default),
     store = _useContext.store,

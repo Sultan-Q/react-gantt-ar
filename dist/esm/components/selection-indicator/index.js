@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 
 /**
  * 鼠标hover效果模拟

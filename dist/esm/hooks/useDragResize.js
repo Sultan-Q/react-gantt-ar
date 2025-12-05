@@ -6,7 +6,9 @@ import { usePersistFn } from "../utils/usePersistFn";
 export default function useDragResize(handleResize, _ref) {
   var initSize = _ref.initSize,
     minWidthConfig = _ref.minWidth,
-    maxWidthConfig = _ref.maxWidth;
+    maxWidthConfig = _ref.maxWidth,
+    _ref$direction = _ref.direction,
+    direction = _ref$direction === void 0 ? 1 : _ref$direction;
   var _useState = useState(false),
     _useState2 = _slicedToArray(_useState, 2),
     resizing = _useState2[0],
@@ -22,7 +24,7 @@ export default function useDragResize(handleResize, _ref) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             distance = event.clientX - positionRef.current.left;
-            width = initSizeRef.current.width + distance;
+            width = initSizeRef.current.width + distance * direction;
             if (minWidthConfig !== undefined) {
               width = Math.max(width, minWidthConfig);
             }

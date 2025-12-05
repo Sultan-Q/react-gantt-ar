@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var ScrollTop = function ScrollTop() {
   var _useContext = useContext(Context),
     store = _useContext.store,

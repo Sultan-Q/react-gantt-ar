@@ -11,7 +11,7 @@ var _mobxReactLite = require("mobx-react-lite");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _utils = require("../../utils");
 var _context = _interopRequireDefault(require("../../context"));
-require("./index.less");
+require("./index.css");
 var height = 8;
 var GroupBar = function GroupBar(_ref) {
   var data = _ref.data;

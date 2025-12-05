@@ -12,7 +12,7 @@ var _find = _interopRequireDefault(require("lodash/find"));
 var _mobxReactLite = require("mobx-react-lite");
 var _react = _interopRequireWildcard(require("react"));
 var _context = _interopRequireDefault(require("../../context"));
-require("./Dependence.less");
+require("./Dependence.css");
 var spaceX = 10;
 var spaceY = 10;
 /**

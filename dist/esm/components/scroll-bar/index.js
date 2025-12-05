@@ -1,9 +1,10 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import { usePersistFn } from "../../utils/usePersistFn";
 import { observer } from 'mobx-react-lite';
 import React, { memo, useCallback, useContext, useRef, useState } from 'react';
 import Context from "../../context";
-import "./index.less";
+import "./index.css";
 var ScrollBar = function ScrollBar() {
   var _useContext = useContext(Context),
     store = _useContext.store,
@@ -42,10 +43,7 @@ var ScrollBar = function ScrollBar() {
   return /*#__PURE__*/React.createElement("div", {
     role: "none",
     className: prefixClsScrollBar,
-    style: {
-      left: tableWidth,
-      width: viewWidth
-    },
+    style: _defineProperty(_defineProperty({}, store.isRTL ? 'right' : 'left', tableWidth), "width", viewWidth),
     onMouseDown: handleMouseDown
   }, resizing && /*#__PURE__*/React.createElement("div", {
     style: {

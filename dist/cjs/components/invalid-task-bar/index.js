@@ -12,7 +12,7 @@ var _mobxReactLite = require("mobx-react-lite");
 var _usePersistFn = require("../../utils/usePersistFn");
 var _context = _interopRequireDefault(require("../../context"));
 var _dragResize = _interopRequireDefault(require("../drag-resize"));
-require("./index.less");
+require("./index.css");
 var barH = 8;
 var startX = 0;
 var renderInvalidBarDefault = function renderInvalidBarDefault(element) {

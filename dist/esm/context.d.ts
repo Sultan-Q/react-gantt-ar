@@ -38,6 +38,8 @@ export interface GanttContext<RecordType = DefaultRecordType> {
     renderRightText?: (barInfo: Gantt.Bar<RecordType>) => React.ReactNode;
     onExpand?: (record: Gantt.Record<RecordType>, collapsed: boolean) => void;
     hideTable?: boolean;
+    isRTL?: boolean;
+    loading?: boolean;
 }
 declare const context: React.Context<GanttContext<DefaultRecordType>>;
 export default context;

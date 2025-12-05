@@ -8,6 +8,8 @@ export var ruRU = Object.freeze({
   halfYear: 'Полугодие',
   firstHalf: 'Первое полугодие',
   secondHalf: 'Второе полугодие',
+  noData: 'Нет данных',
+  loading: 'Загрузка...',
   majorFormat: {
     day: 'MMMM YYYY',
     week: 'MMMM YYYY',
